@@ -26,16 +26,7 @@ LTC4100_LTCO=0x3C
 #	SMBWriteWordCommand(ADD_SMART_BATTERY_CHARGER, LTC4100_CHARGER_MODE, 8);
 
 
-while true; do
-	# Voltage and Current mus be re-sended each 140-210 Sec to avoid timeout	
 	#	http://cds.linear.com/docs/en/datasheet/4100fc.pdf
-	# Pg.5 	: Time Between Receiving Valid ChargingCurrent() and ChargingVoltage() Commands
-	# Pg.10 : The wake-up current is discontinued after tTIMEOUT if the SafetySignal is decoded 
-	#	  as RES_UR or RES_C0LD, and the battery or host doesn't transmit charging commands
 	
-	echo $(date) ' : Set charging voltage to ' $1 'mV and current to ' $2 'mA'
-	i2cset -y 1 $ADD_LTC4100_READ $LTC4100_CHARGING_VOLTAGE $1 w
-#	echo 'Set charging current to : ' $2 ' mA'
-	i2cset -y 1 $ADD_LTC4100_READ $LTC4100_CHARGING_CURRENT $2 w
-	sleep 20
-done
+	#echo $(date) ' : Set charging voltage to ' $1 'mV and current to ' $2 'mA'
+	i2cset -y 1 $ADD_LTC4100_READ $LTC4100_ALARM_WARNING $1 w
